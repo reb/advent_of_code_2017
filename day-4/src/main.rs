@@ -25,7 +25,7 @@ fn main() {
         })
         .count();
 
-    println!("There are {} pass-prhases with unique words", unique_words_phrases);
+    println!("There are {} pass-phrases with unique words", unique_words_phrases);
 
     let unique_anagram_phrases = contents.lines()
         .filter(|line| {
