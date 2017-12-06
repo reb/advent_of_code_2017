@@ -1,25 +1,17 @@
-use std::fs::File;
-use std::io::prelude::*;
 use std::collections::HashSet;
 
 
-fn get_input(filename: &str) -> Vec<u32> {
-    let mut file = File::open(filename)
-        .expect("File not found");
-
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)
-        .expect("Could not read file");
-    
-    convert(&contents)
+fn get_input() -> Vec<u32> {
+    const INPUT: &str = include_str!("input.txt");
+    convert(INPUT)
 }
 
-fn convert(input: &String) -> Vec<u32> {
+fn convert(input: &str) -> Vec<u32> {
     input.lines().next().unwrap()
-        .split("\t")
-        .map(|item| item.to_string().parse::<u32>()
-             .expect("Item could not be parsed to u32"))
-        .collect::<Vec<u32>>()
+        .split_whitespace()
+        .map(|item| item.parse()
+             .expect("Item could not be parsed"))
+        .collect()
 }
 
 fn redistribute(memory: &Vec<u32>) -> Vec<u32> {
@@ -63,7 +55,7 @@ fn redistribute(memory: &Vec<u32>) -> Vec<u32> {
 }
 
 fn main() {
-    let mut memory = get_input("input.txt");
+    let mut memory = get_input();
     let mut previous_states = HashSet::new();
     let mut loop_states = HashSet::new();
 
