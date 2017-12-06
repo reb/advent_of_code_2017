@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::prelude::*;
+use std::time::Instant;
 
 fn convert(input: &String) -> Vec<i32> {
     input.lines()
@@ -51,9 +52,13 @@ fn main() {
     file.read_to_string(&mut contents)
         .expect("Could not read file");
 
+    let mut now = Instant::now();
     let steps = run_instructions(&contents, &update);
-    println!("It took {} steps to escape the maze", steps);
+    let mut elapsed = now.elapsed();
+    println!("It took {} steps to escape the maze ({}.{:09} seconds)", steps, elapsed.as_secs(), elapsed.subsec_nanos());
 
+    now = Instant::now();
     let stranger_steps = run_instructions(&contents, &stranger_update);
-    println!("It took {} steps to escape the maze with stranger jumps", stranger_steps);
+    elapsed = now.elapsed();
+    println!("It took {} steps to escape the maze with stranger jumps ({}.{:09} seconds)", stranger_steps, elapsed.as_secs(), elapsed.subsec_nanos());
 }
