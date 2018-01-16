@@ -1,7 +1,6 @@
 [package]
-name = "day-10"
+name = "knothash"
 version = "0.1.0"
 authors = ["reb <reboumans@gmail.com>"]
 
 [dependencies]
-knothash = { path = "../knothash" }
